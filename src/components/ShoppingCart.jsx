@@ -9,17 +9,20 @@ import CardImage from './cardImage';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from "react-router-dom";
 import AddToCartButton from './AddToCartButton';
-import {removeItem, getCartItems} from '../reducer/cartSlice'
+import {removeItem, getCartItems, removeCart, fetchItemById} from '../reducer/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { Delete } from "../icons/index"
+import { gbpFormatter } from '../utils/currencyFormatter';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router";
 import CartAddRemoveButton from './CartAddRemoveButton';
 
 const ShoppingCart   = () => {
-
+ let navigate = useNavigate();
   const cartItems = useSelector(getCartItems);
   const dispatch = useDispatch();
 
-  const totalCartItems = cartItems.reduce((acc, item) => acc + item.itemCount, 0);
+  //const totalCartItems = cartItems.reduce((acc, item) => acc + item.itemCount, 0);
   const totalCartValue = cartItems.reduce((acc, item) => acc + item.unitPrice * item.itemCount, 0).toFixed(2); 
 
 
@@ -30,53 +33,82 @@ const ShoppingCart   = () => {
  
   <div class="col-8">
     
-     <div className="d-flex flex-row" style={{ maxWidth: '100%', justifyContent: 'left', flexWrap: 'wrap'
-      } }>
-
-        <table class="table">
+    <div class="table-responsive">
+        <table class="table table-striped 
+                    table-bordered table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Total</th>
-      <th scope="col"></th>
+      <th className='col-1 ' scope="col"></th>
+      <th scope="col">Product Name</th>
+      <th className='text-center' scope="col">Price</th>
+      <th className='col-3 text-center' scope="col">Quantity</th>
+      <th className='col-2 text-center' scope="col">Total</th>
+      <th className='col-1 text-center' scope="col"></th>
     </tr>
   </thead>
   <tbody>
 
       {cartItems.map((variant, i) => (
         <tr key={variant.id}>
-          <td>{i+1}</td>
-          <td>{variant.title}</td>
-          <td>{variant.unitPrice}</td>
+          <td className='text-center'> 
+             <CardImage text="img-1" height="30px" width="30px" /></td>
           <td>
+            <Link to={`/products/${variant.id}`}>{variant.title}</Link>
+          </td>
+          <td  className='text-center'>{variant.unitPrice}</td>
+          <td className='text-center'>
             <CartAddRemoveButton product={variant} />
 
           </td>
-          <td>{variant.unitPrice * variant.itemCount}</td>
-           <th scope="col">
+          <td  className='text-center'>{ gbpFormatter.format(variant.unitPrice * variant.itemCount)}</td>
+           <td className='text-center' scope="col">
          <button  onClick={() =>  
-                dispatch(removeItem( variant))}   className="btn btn-info" >
-              X
+                dispatch(removeItem( variant))}   className="btn btn-danger" >
+             <Delete />
             </button>
 
-           </th>
+           </td>
         </tr>
       ))}
       <tr key="totalCartItems">
           <td></td>
           <td></td>
           <td></td>
-          <td>{totalCartItems}</td>
-          <td>{totalCartValue}</td>
-           <th scope="col">
+          <td></td>
+          <td  className='text-center'> <b>{gbpFormatter.format(totalCartValue)}</b></td>
+           <td scope="col">
 
 
 
-           </th>
+           </td>
         </tr>
+ <tr key="cartItemFooter">
+          <td className='text-center' colSpan={6}>
+             <Link to="/products">
+          <Button variant="flat" size="xxl">
+             Continue Shopping....
+        </Button>
+      </Link>
+     <button  onClick={ () =>  {
+             dispatch(fetchItemById()).then(() => {
+             console.log("***************Cart Cleared*****************");
+             navigate("/home");
+            });
+          }}   className="btn btn-danger" >
+            Clear Cart <Delete />
+            </button>
+
+<Link to="/checkout">
+        <Button variant="flat" size="xxl">
+             Checkout (Comming soon.......)
+        </Button>
+</Link>
+
+           </td>
+        </tr>
+
+
+
         </tbody>
 </table>
       </div>

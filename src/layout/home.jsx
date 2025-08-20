@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router";
 
 const Home = () => {
   return (
@@ -14,9 +15,11 @@ const Home = () => {
   <Container>
     <Row>
         <Col md={{ span: 2, offset: 5 }}>
-          <Button variant="flat" size="xxl">
-        Get Started
-      </Button>
+          <Link to="/products">
+            <Button variant="flat" size="xxl">
+              Get Started
+            </Button>
+          </Link>
         </Col>
     </Row>
       <Row>

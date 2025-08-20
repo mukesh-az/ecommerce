@@ -3,8 +3,9 @@ import { Logo, Menu, Cart } from "../icons/index"
 import { avatar } from "../assets/imagedata"
 import { getQuantity} from '../reducer/cartSlice'
 import { useSelector } from 'react-redux'
-
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
+import { Link, Routes, Route, Outlet, NavLink } from "react-router";
 const navLinks = ["Home", "Products"]
 
 
@@ -24,28 +25,23 @@ const cartQuantity = useSelector(state => getQuantity(state.cart, null));
             {navLinks.map((link, idx) => {
               return (
                 <li key={idx}>
-                  <Link to={link}>{link}</Link>
+                  <NavLink to={link === "Home" ? "/" : `/${link.toLowerCase()}`}
+                  >{link}</NavLink>
                 </li>
               )
             })}
           </ul>
         </div>
         <div className="nav-right">
-          <button
-            onClick={() => {
-              if (1 === 2) {
-                hideCart()
-              } else {
-                showCart()
-              }
-            }}
-            className="cart-btn">
-              <Link to="/cart"><Cart /> {cartQuantity}</Link>
-            ___
-          </button>
-          <button className="avatar-btn">
-            <img src={avatar} alt="avatar" />
-          </button>
+          
+            <button className="avatar-btn cart-btn ml-1">
+              <NavLink to={cartQuantity > 0 ? "/cart" : "#"}>
+              <Cart className="mt-10" />
+              {cartQuantity > 0 && (
+                <Badge bg="danger">{cartQuantity}</Badge>
+              )}
+        </NavLink>
+          </button> 
         </div>
       </nav>
     </NavigatorWrapper>

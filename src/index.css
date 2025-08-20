@@ -56,18 +56,9 @@ body {
   min-height: 100vh;
   font-family: "Kumbh Sans", sans-serif;
   background-image: url("/src/assets/shop.jpeg");
-  font-size:medium;
-}
-input {
   font-size:medium!important;
-  font-family: "Kumbh Sans", sans-serif;
 }
 
-button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
 
 /* Splide override Styles */
 
@@ -88,3 +79,27 @@ button {
       padding: 1rem 1.5rem;
       font-size: 1.5rem;
     }
+    .btn {
+      font-size: 1.25rem;
+      margin-right: 3px;
+      margin-left: 3px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bolder;
+      height: 30px;
+    }
+    .btn-border {
+      border: 1px solid #202020;
+    }
+    .active {
+     border-bottom: 2px solid #d16c44;
+      color: hsl(var(--white));
+    }
+
+    nav {
+  width: 100%;
+}
+nav a {
+  color: hsl(var(--black));
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
+}

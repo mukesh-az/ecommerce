@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { createAsyncThunk } from '@reduxjs/toolkit'
 const cartInitialState = {
     cartItems: []
 };
+
+export const fetchItemById = createAsyncThunk(
+  'items/fetchItemById',
+  async () => {
+   
+   console.log("Fetching item by ID");
+  }
+)
 
 export const getCartItems = (state) => state.cart.cartItems;
 
@@ -29,6 +37,10 @@ const CartSlice = createSlice({
       });
       }
     },
+   removeCart(state, action) {
+    console.log("Removing all items from cart");
+    state.cartItems = [];
+  },
     removeItem(state, action) {
       state.cartItems = state.cartItems.filter(item => item.id.toString() !== action.payload.id.toString());
     },
@@ -38,7 +50,7 @@ const CartSlice = createSlice({
        if (foundProduct) {
            console.log("Found product:", foundProduct);
             let updatedArr = state.cartItems.map(item => {
-            if (item.id.toString() === action.payload.id.toString() && item.quantity > action.payload.itemCount) {
+            if (item.id.toString() === action.payload.id.toString() && item.quantity >= action.payload.itemCount) {
                 item.itemCount = action.payload.itemCount;
                 console.log("Updated item:", item);
             }
@@ -48,6 +60,13 @@ const CartSlice = createSlice({
        }
     }
   }
+   , extraReducers: builder => {
+    builder.addCase(fetchItemById.fulfilled, (state, action) => {
+      console.log("Extra reducer for fetchItemById called");
+      // Handle the fetched item if needed
+      return state;
+    });
+  }
 });
-export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity, removeCart } = CartSlice.actions;
 export default CartSlice.reducer;

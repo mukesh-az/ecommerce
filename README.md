@@ -1,3 +1,8 @@
+https://codesandbox.io/p/sandbox/ecommerce-react-vite-lv3rgj?file=%2Fsrc%2Flayout%2FNavigator.jsx%3A65%2C1
+
+https://www.geeksforgeeks.org/reactjs/navigate-component-in-react-router/
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

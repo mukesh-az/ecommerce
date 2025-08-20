@@ -1,0 +1,52 @@
+ [{
+            "id": 1,
+            "title": "Apple",
+            "description": "Red apple.",
+            "category": "Fruit",
+            "image": "apple.jpg",
+            "unitPrice": 9.99,
+            "quantity": 100
+        },
+        {
+            "id": 2,
+            "title": "Orange",
+            "description": "Juicy orange.",
+            "category": "Fruit",
+            "image": "orange.jpg",
+            "unitPrice": 5,
+            "quantity": 100
+        },
+        {
+            "id": 3,
+            "title": "Potato",
+            "description": "White Potato.",
+            "category": "Vegetable",
+            "image": "potato.jpg",
+            "unitPrice": 2,
+            "quantity": 150
+        },
+        {
+            "id": 4,
+            "title": "Carrot",
+            "description": "Fresh carrot.",
+            "category": "Vegetable",
+            "image": "carrot.jpg",
+            "unitPrice": 3,
+            "quantity": 200
+        },
+        {
+            "id": 5,
+            "title": "Rose",
+            "description": "Red rose.",
+            "category": "Flower",
+            "unitPrice": 7,
+            "quantity": 100
+        },
+        {
+            "id": 6,
+            "title": "Tulip",
+            "description": "Fresh tulip.",
+            "category": "Flower",
+            "unitPrice": 4,
+            "quantity": 80
+        }]

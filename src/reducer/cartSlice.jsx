@@ -4,11 +4,10 @@ const cartInitialState = {
     cartItems: []
 };
 
-export const fetchItemById = createAsyncThunk(
-  'items/fetchItemById',
+export const clearAllCartItems = createAsyncThunk(
+  'items/clearAllCartItems',
   async () => {
    
-   console.log("Fetching item by ID");
   }
 )
 
@@ -37,10 +36,6 @@ const CartSlice = createSlice({
       });
       }
     },
-   removeCart(state, action) {
-    console.log("Removing all items from cart");
-    state.cartItems = [];
-  },
     removeItem(state, action) {
       state.cartItems = state.cartItems.filter(item => item.id.toString() !== action.payload.id.toString());
     },
@@ -61,9 +56,8 @@ const CartSlice = createSlice({
     }
   }
    , extraReducers: builder => {
-    builder.addCase(fetchItemById.fulfilled, (state, action) => {
-      console.log("Extra reducer for fetchItemById called");
-      // Handle the fetched item if needed
+    builder.addCase(clearAllCartItems.fulfilled, (state, action) => {
+       state.cartItems = [];
       return state;
     });
   }

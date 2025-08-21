@@ -76,8 +76,8 @@ const Products = () => {
            <ListGroup>
      {checkBoxList.map((opt) => (
 
-      
-          <ListGroup.Item className='mb-2' >
+
+          <ListGroup.Item key={opt.key} className='mb-2' >
             <div className="form-check">
                   <input
                    className="form-check-input"

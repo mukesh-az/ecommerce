@@ -9,15 +9,17 @@ import CardImage from './cardImage';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from "react-router-dom";
 import AddToCartButton from './AddToCartButton';
-import {removeItem, getCartItems, removeCart, fetchItemById} from '../reducer/cartSlice'
+import {removeItem, getCartItems, removeCart, clearAllCartItems} from '../reducer/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { Delete } from "../icons/index"
 import { gbpFormatter } from '../utils/currencyFormatter';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router";
 import CartAddRemoveButton from './CartAddRemoveButton';
+import PendingModal from './PendingModal';
 
 const ShoppingCart   = () => {
+    const [modalShow, setModalShow] = useState(false);
  let navigate = useNavigate();
   const cartItems = useSelector(getCartItems);
   const dispatch = useDispatch();
@@ -90,19 +92,25 @@ const ShoppingCart   = () => {
         </Button>
       </Link>
      <button  onClick={ () =>  {
-             dispatch(fetchItemById()).then(() => {
-             console.log("***************Cart Cleared*****************");
-             navigate("/home");
+             dispatch(clearAllCartItems()).then(() => {
+             navigate("/");
             });
           }}   className="btn btn-danger" >
             Clear Cart <Delete />
             </button>
 
-<Link to="/checkout">
-        <Button variant="flat" size="xxl">
+
+        <Button variant="flat" size="xxl"
+         onClick={() => setModalShow(true)}
+        >
              Checkout (Comming soon.......)
         </Button>
-</Link>
+
+
+      <PendingModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
 
            </td>
         </tr>

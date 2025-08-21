@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router";
 
+import companyData from '../data/company.json';
 const Home = () => {
   return (
 <>
@@ -55,11 +56,16 @@ const Home = () => {
       </Row>
        <Row>
         <Col md={{ span: 10, offset: 1 }}>
-        
-        <div className="alert alert-info" role="alert">
+
+        <div className="bg-light">
+
   <blockquote className="blockquote text-center">
-  <p class="mb-3 display-4">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <p className="mb-3 display-4">
+    {companyData.name}
+  </p>
+  <p className="mb-3">
+    {companyData.description}
+  </p>
   <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
 </blockquote>
 </div>

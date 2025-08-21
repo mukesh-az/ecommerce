@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import { Link, Routes, Route, Outlet, NavLink } from "react-router";
+import { CompanyLogo} from "../components/CompanyLogo"
 const navLinks = ["Home", "Products"]
 
 
@@ -19,7 +20,9 @@ const cartQuantity = useSelector(state => getQuantity(state.cart, null));
       <nav>
         <div className="nav-left">
           <div className="logo">
-             <Link to="/"><Logo /></Link>
+             <Link to="/">
+              <CompanyLogo />
+            </Link>
           </div>
           <ul className="nav-links">
             {navLinks.map((link, idx) => {
@@ -33,15 +36,19 @@ const cartQuantity = useSelector(state => getQuantity(state.cart, null));
           </ul>
         </div>
         <div className="nav-right">
-          
-            <button className="avatar-btn cart-btn ml-1">
-              <NavLink to={cartQuantity > 0 ? "/cart" : "#"}>
+          {cartQuantity > 0 ? ( <button 
+            className="avatar-btn cart-btn ml-1">
+              <NavLink to="/cart">
               <Cart className="mt-10" />
               {cartQuantity > 0 && (
                 <Badge bg="danger">{cartQuantity}</Badge>
               )}
-        </NavLink>
-          </button> 
+              </NavLink>
+          </button> ) : ( <button 
+            className="avatar-btn bg-transparent">
+              <Cart  className="mt-10" />
+          </button> )}
+           
         </div>
       </nav>
     </NavigatorWrapper>
